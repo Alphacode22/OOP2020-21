@@ -126,18 +126,20 @@ class CardGame():
     def check_scores(self):
         if self.score < 21:
             # smaller than 21
-            self.score_label = "smaller than 21"
-        elif self.score < 21:
+            self.score_label = "You win, play again?"
+        elif self.score > 21:
             # greater than 21
-            self.score_label = "greater than 21"
+            self.score_label = "You lose, play again?"
         elif self.score == 21:
             # greater than 21
-            self.score_label = "equal to 21"
+            self.score_label = "You hit the jack pot!"
 
     # calculates the new score
     # takes a card argument of type
     def update_score(self, card):
-       self.score = 0
+        self.score = 0
+
+
 
     # this method is called when the "Done" button is clicked
     # it means that the game is over and we check the score
