@@ -95,7 +95,10 @@ class CardGame():
         files = os.listdir(path)
         for f in files:
             print(f)
+            card_list.append(f)
         # print(len(files))
+        # card_list = [for f in files]
+        print(card_list)
 
         shuffle(card_list)
         # your code goes here:
