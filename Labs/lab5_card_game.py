@@ -3,7 +3,7 @@
 # author: B. Schoen-Phelan
 # date: Oct 2020
 # purpose: Lab 5 - GUI and card game using queue
-
+import queue
 from tkinter import *
 
 # to use the queue FIFO
@@ -17,6 +17,13 @@ from random import randint
 
 # import a file operator
 import os
+
+
+# Label
+# Card image
+# Shuffling card may need queues - pop first card push temp card to back
+# Other functions not done
+
 
 
 class CardGame():
@@ -57,15 +64,15 @@ class CardGame():
         self.open_card.grid(row=0, column=0, padx=2, pady=2)
         self.open_card.photo = the_card
 
-        closed_deck = Button(cards_frame)
+        closed_deck = Button(cards_frame, command=self.pick_card)
         closed_card = PhotoImage(file='cards/closed_deck.gif')
         closed_deck.config(image=closed_card)
         closed_deck.grid(row=0, column=1, padx=2, pady=2)
         closed_deck.photo = closed_card
 
-        done_button = Button(button_frame, text="I'm done!")
+        done_button = Button(button_frame, text="I'm done!", command=self.check_scores)
         done_button.grid(row=0, column=0, pady=12)
-        new_game_button = Button(button_frame, text="New Game")
+        new_game_button = Button(button_frame, text="New Game", command=self.reset_game)
         new_game_button.grid(row=1, column=0, pady=13)
         exit_button = Button(button_frame, text="Exit", command=self.game_exit)
         exit_button.grid(row=2, column=0, pady=13)
@@ -84,30 +91,26 @@ class CardGame():
     # puts everything in a list first as it needs to be shuffled
     # returns a queue
     def load_cards(self):
-        cards = Queue(maxsize=52) #change this if you want to use a different data structure
-        suits = ("hearts", "diamonds", "spades", "clubs")
-        people = ("queen", "jack", "king")
-        card_list = []
-
-        # # your code goes here:
-        # path = "C:\\Users\\AlexZ\\PycharmProjects\\Lab1\\OOP2020-21\\Labs\\cards\\1_clubs.gif"
-        # f = open(path, 'r')
-        # # images = f.read()
-        # print(path)
+        print("\nLoad cards")
+        # cards = Queue(maxsize=52) #change this if you want to use a different data structure
+        cards= []
+        # suits = ("hearts", "diamonds", "spades", "clubs")
+        # people = ("queen", "jack", "king")
 
         path = "C:\\Users\\AlexZ\\PycharmProjects\\Lab1\\OOP2020-21\\Labs\\cards"
         files = os.listdir(path)
         for f in files:
-            # print(f)
-            card_list.append(f)
-        # print(card_list)
+            if f != "closed_deck.gif":
+                cards.append(f)
+                # cardsList.append(f)
+            #print(f)
+        shuffle(cards)
+        # [cards.put(i) for i in cardsList]
 
-        shuffle(card_list)
-
-        # puts those card .git into cards
-        cards = card_list
-        # your code goes here:
-        # print(cards)
+        print(cards)
+        # print(len(cards))
+        # pickedCard = cards[0]
+        # print("\n" + pickedCard)
         return cards
 
     # called when clicking on the closed deck of cards
@@ -115,8 +118,15 @@ class CardGame():
     # updates the display
     # updates the score
     def pick_card(self):
-        pickedCard = self.the_cards[0]
-        self.init_window()
+        print("\nPick card")
+        # pickedCard = self.the_cards.dequeue(1)
+        # self.the_cards[-1].put(pickedCard)
+        pickedCard = self.the_cards.pop(0)
+        self.the_cards.append(pickedCard)
+        # the_card = PhotoImage(file=f'cards/{pickedCard}')
+        print(pickedCard)
+        print(len(self.the_cards))
+        self.open_card.photo = pickedCard
         self.update_score(pickedCard)
 
 
@@ -124,22 +134,47 @@ class CardGame():
     # is smaller, greater or equal to 21
     # sets a label
     def check_scores(self):
-        if self.score < 21:
+        print("\nCheck score")
+        if self.player_score < 21:
             # smaller than 21
-            self.score_label = "You win, play again?"
-        elif self.score > 21:
+            # self.score_label = Label(score_frame, text="Your score: " + str(self.player_score) + "You win, play again?", justify=LEFT)
+            self.score_label.text = "Your score: " + str(self.player_score) + "You win, play again?"
+        elif self.player_score > 21:
             # greater than 21
-            self.score_label = "You lose, play again?"
-        elif self.score == 21:
-            # greater than 21
-            self.score_label = "You hit the jack pot!"
+            # self.score_label = Label(score_frame, text="Your score: " + str(self.player_score) + "You lose, play again?", justify=LEFT)
+            self.score_label.text = "Your score: " + str(self.player_score) + "You lose, play again?"
+        elif self.player_score == 21:
+            # equal to 21
+            # self.score_label = Label(score_frame, text="Your score: " + str(self.player_score) + "You hit the jack pot!", justify=LEFT)
+            self.score_label.text = "Your score: " + str(self.player_score) + "You hit the jack pot!"
 
     # calculates the new score
     # takes a card argument of type
     def update_score(self, card):
-        self.score = 0
-
-
+        print("\nUpdate Score")
+        if "10" in card:
+            self.player_score += 10
+        elif "1" in card:
+            self.player_score += 1
+        elif "2" in card:
+            self.player_score += 2
+        elif "3" in card:
+            self.player_score += 3
+        elif "4" in card:
+            self.player_score += 4
+        elif "5" in card:
+            self.player_score += 5
+        elif "6" in card:
+            self.player_score += 6
+        elif "7" in card:
+            self.player_score += 7
+        elif "8" in card:
+            self.player_score += 8
+        elif "9" in card:
+            self.player_score += 9
+        elif "jack" in card or "queen" in card or "king" in card:
+            self.player_score += 10
+        print(self.player_score)
 
     # this method is called when the "Done" button is clicked
     # it means that the game is over and we check the score
@@ -155,7 +190,10 @@ class CardGame():
     # sets the game's cards to the initial stage, with a freshly
     # shuffled card deck
     def reset_game(self):
-        pass  # replace this line by your code
+        # trying this
+        self.player_score = 0
+        self.init_window()
+
 
 
 # object creation here:
