@@ -51,6 +51,16 @@ class WordCloud:
         my_dict = {}
         # your code goes here:
 
+        f= open("gettisburg.txt", 'r')
+        for line in f:
+            words = line.split(" ");
+            for word in words:
+                if word in my_dict:
+                    my_dict[word][1] = my_dict[word][1]+1
+                else:
+                    my_dict[word] = [word,1]
+        print(my_dict, end="")
+        f.close()
         return my_dict
 
     # helper function that is called from
@@ -60,10 +70,34 @@ class WordCloud:
     # if this word already exists. Otherwise sets the
     # word occurance counter to 1
     # returns a dictionary
+
     def add_to_dict(self, word, the_dict):
         # your code goes here
+        print(word)
+        print(the_dict)
+
+        # for key, value in the_dict:
+        #     if word == the_dict:
+        #         the_dict[key] += 1
+        #     print(key, value)
+
+        # the_dict[word][1] = the_dict[word][1]+1;
+
+        # for variable in the_dict:
+        #     if variable == the_dict:
+        #         the_dict[variable] += 1
+        #     print(the_dict, the_dict[variable])
 
         return the_dict
 
 
 wc = WordCloud()
+
+# my_dict = wc.create_dict()
+# wc.add_to_dict(my_dict)
+
+# f = open("gettisburg.txt", 'r')
+#         for line in fo:
+#             my_dict = line.split()
+#             # print(my_dict, end="")
+#         f.close()

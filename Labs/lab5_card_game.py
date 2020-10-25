@@ -12,6 +12,8 @@ from queue import Queue
 # to use the shuffle for shuffling the cards
 from random import shuffle
 
+import os
+
 
 class CardGame():
 
@@ -83,12 +85,20 @@ class CardGame():
         people = ("queen", "jack", "king")
         card_list = []
 
-        # your code goes here:
+        # # your code goes here:
+        # path = "C:\\Users\\AlexZ\\PycharmProjects\\Lab1\\OOP2020-21\\Labs\\cards\\1_clubs.gif"
+        # f = open(path, 'r')
+        # # images = f.read()
+        # print(path)
+
+        path = "C:\\Users\\AlexZ\\PycharmProjects\\Lab1\\OOP2020-21\\Labs\\cards"
+        files = os.listdir(path)
+        for f in files:
+            print(f)
+        # print(len(files))
 
         shuffle(card_list)
-
         # your code goes here:
-
         return cards
 
     # called when clicking on the closed deck of cards
