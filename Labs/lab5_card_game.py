@@ -18,13 +18,12 @@ from random import randint
 # import a file operator
 import os
 
-
 # Label
 # Card image
 # Shuffling card may need queues - pop first card push temp card to back
 # Other functions not done
 
-
+# Research Label
 
 class CardGame():
 
@@ -93,7 +92,7 @@ class CardGame():
     def load_cards(self):
         print("\nLoad cards")
         # cards = Queue(maxsize=52) #change this if you want to use a different data structure
-        cards= []
+        cards = []  # acts as a queue though
         # suits = ("hearts", "diamonds", "spades", "clubs")
         # people = ("queen", "jack", "king")
 
@@ -123,10 +122,10 @@ class CardGame():
         # self.the_cards[-1].put(pickedCard)
         pickedCard = self.the_cards.pop(0)
         self.the_cards.append(pickedCard)
-        # the_card = PhotoImage(file=f'cards/{pickedCard}')
+        # self.the_card = PhotoImage(file=f'cards/{pickedCard}')
         print(pickedCard)
-        print(len(self.the_cards))
-        self.open_card.photo = pickedCard
+        # print(len(self.the_cards))
+        # self.open_card.photo = pickedCard
         self.update_score(pickedCard)
 
 
@@ -135,18 +134,21 @@ class CardGame():
     # sets a label
     def check_scores(self):
         print("\nCheck score")
+        # smaller than 21
         if self.player_score < 21:
-            # smaller than 21
+            self.score_label = "You win"
             # self.score_label = Label(score_frame, text="Your score: " + str(self.player_score) + "You win, play again?", justify=LEFT)
-            self.score_label.text = "Your score: " + str(self.player_score) + "You win, play again?"
+            # self.score_label.text = "Your score: " + str(self.player_score) + "You win, play again?"
+        # greater than 21
         elif self.player_score > 21:
-            # greater than 21
+            self.score_label = "You lose"
             # self.score_label = Label(score_frame, text="Your score: " + str(self.player_score) + "You lose, play again?", justify=LEFT)
-            self.score_label.text = "Your score: " + str(self.player_score) + "You lose, play again?"
+            # self.score_label.text = "Your score: " + str(self.player_score) + "You lose, play again?"
+        # equal to 21
         elif self.player_score == 21:
-            # equal to 21
-            # self.score_label = Label(score_frame, text="Your score: " + str(self.player_score) + "You hit the jack pot!", justify=LEFT)
-            self.score_label.text = "Your score: " + str(self.player_score) + "You hit the jack pot!"
+            self.score_label = "You hit the jack pot!"
+            #self.score_label = Label(score_frame, text="Your score: " + str(self.player_score) + "You hit the jack pot!", justify=LEFT)
+            # self.score_label.text = "Your score: " + str(self.player_score) + "You hit the jack pot!"
 
     # calculates the new score
     # takes a card argument of type
@@ -192,7 +194,7 @@ class CardGame():
     def reset_game(self):
         # trying this
         self.player_score = 0
-        self.init_window()
+        # self.init_window()
 
 
 
