@@ -12,6 +12,10 @@ from queue import Queue
 # to use the shuffle for shuffling the cards
 from random import shuffle
 
+# import random
+from random import randint
+
+# import a file operator
 import os
 
 
@@ -94,14 +98,16 @@ class CardGame():
         path = "C:\\Users\\AlexZ\\PycharmProjects\\Lab1\\OOP2020-21\\Labs\\cards"
         files = os.listdir(path)
         for f in files:
-            print(f)
+            # print(f)
             card_list.append(f)
-        # print(len(files))
-        # card_list = [for f in files]
-        print(card_list)
+        # print(card_list)
 
         shuffle(card_list)
+
+        # puts those card .git into cards
+        cards = card_list
         # your code goes here:
+        # print(cards)
         return cards
 
     # called when clicking on the closed deck of cards
@@ -109,18 +115,29 @@ class CardGame():
     # updates the display
     # updates the score
     def pick_card(self):
-        pass  # replace this line by your code
+        pickedCard = self.the_cards[0]
+        self.init_window()
+        self.update_score(pickedCard)
+
 
     # contains the logic to compare if the score
     # is smaller, greater or equal to 21
     # sets a label
     def check_scores(self):
-        pass  # replace this line by your code
+        if self.score < 21:
+            # smaller than 21
+            self.score_label = "smaller than 21"
+        elif self.score < 21:
+            # greater than 21
+            self.score_label = "greater than 21"
+        elif self.score == 21:
+            # greater than 21
+            self.score_label = "equal to 21"
 
     # calculates the new score
     # takes a card argument of type
     def update_score(self, card):
-        pass  # replace this line by your code
+       self.score = 0
 
     # this method is called when the "Done" button is clicked
     # it means that the game is over and we check the score
