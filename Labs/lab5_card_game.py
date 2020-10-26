@@ -76,7 +76,11 @@ class CardGame():
         exit_button = Button(button_frame, text="Exit", command=self.game_exit)
         exit_button.grid(row=2, column=0, pady=13)
 
+        # added my label
+        # self.score_label = Label(score_frame, text=self.my_label, justify=LEFT)
+        # self.update_score(pickedCard)
         self.score_label = Label(score_frame, text="Your score: " + str(self.player_score), justify=LEFT)
+        # .config
         self.score_label.pack()
 
         root.mainloop()
@@ -136,19 +140,25 @@ class CardGame():
         print("\nCheck score")
         # smaller than 21
         if self.player_score < 21:
-            self.score_label = "You win"
+            pass
+            # self.score_label = "You win"
             # self.score_label = Label(score_frame, text="Your score: " + str(self.player_score) + "You win, play again?", justify=LEFT)
             # self.score_label.text = "Your score: " + str(self.player_score) + "You win, play again?"
+            self.my_label = "Your score: " + str(self.player_score) + "You win, play again?"
         # greater than 21
         elif self.player_score > 21:
-            self.score_label = "You lose"
+            pass
+            # self.score_label = "You lose"
             # self.score_label = Label(score_frame, text="Your score: " + str(self.player_score) + "You lose, play again?", justify=LEFT)
             # self.score_label.text = "Your score: " + str(self.player_score) + "You lose, play again?"
+            self.my_label = "Your score: " + str(self.player_score) + "You lose, play again?"
         # equal to 21
         elif self.player_score == 21:
-            self.score_label = "You hit the jack pot!"
+            pass
+            # self.score_label = "You hit the jack pot!"
             #self.score_label = Label(score_frame, text="Your score: " + str(self.player_score) + "You hit the jack pot!", justify=LEFT)
             # self.score_label.text = "Your score: " + str(self.player_score) + "You hit the jack pot!"
+            self.my_label = "Your score: " + str(self.player_score) + "You hit the jack pot!"
 
     # calculates the new score
     # takes a card argument of type
@@ -177,6 +187,7 @@ class CardGame():
         elif "jack" in card or "queen" in card or "king" in card:
             self.player_score += 10
         print(self.player_score)
+        self.update_score(card)
 
     # this method is called when the "Done" button is clicked
     # it means that the game is over and we check the score
