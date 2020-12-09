@@ -85,7 +85,20 @@ class WordDuplication(WordGames): # you implement this and provide docstrings
         print(doubleWords)
 
 class WordScramble(WordGames): # you implement this and provide docstrings
-    pass
+    #   practise
+    def word_play(self):
+        scrambled = ''
+        list_of_words = self.the_words.split()
+
+        for word in list_of_words:
+            if (len(word) > 4):
+                scrambled += word[0] + word[-1] + word[2:-1] + word[1] + ' '
+            else:
+                print("Too few letters for scrambling:", word)
+
+        print(scrambled)
+
+
 
 
 # prints the docstrings info
@@ -93,6 +106,12 @@ class WordScramble(WordGames): # you implement this and provide docstrings
 print(WordGames.__doc__)
 
 # Create an instances of the classes here:
-wg = WordGames()
-wg.word_play()
+# wg = WordGames()
+# wg.word_play()
+#
+# wd = WordDuplication()
+# wd.word_play()
+
+ws = WordScramble()
+ws.word_play()
 

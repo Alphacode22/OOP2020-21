@@ -60,7 +60,7 @@ class MathsGames(Maths):
 
 
     def userGuess(self):
-        userGuess = input("Your ans is: ")
+        userGuess = int(input("Your ans is: "))
         return userGuess
 
 

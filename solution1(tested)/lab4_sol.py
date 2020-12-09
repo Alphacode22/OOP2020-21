@@ -33,7 +33,7 @@ class WordCloud:
         my_dict = {}
 
         try:
-            fo = open("../gettisburg.txt", "r")
+            fo = open("../Labs/gettisburg.txt", "r")
         except Exception as e:
             my_dict = False
             print("Caught this error: %s" % e.__class__.__name__)
@@ -84,7 +84,7 @@ class WordCloud:
     # in order to get a decent size output in the html
     def create_html(self, the_dict):
         try:
-            fo = open("../output.html", "w")
+            fo = open("../Labs/output.html", "w")
         except Exception as e:
             print("Caught this error: %s" % e.__class__.__name__)
         else:
