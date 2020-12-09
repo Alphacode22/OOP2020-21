@@ -73,7 +73,10 @@ class RegistrationData:
         self.__address = address
         self.__registration_fee = registration_fee
         self.__s_id = s_id
-        self.student_object = Student(study_type, f_name, l_name)
+        try:
+            self.__student_object = Student(study_type, f_name, l_name)
+        except Exception as e:
+            pass
 
 
     # YOUR CODE GOES HERE
