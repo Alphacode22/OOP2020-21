@@ -10,7 +10,8 @@ class Student:
     INSERT YOUR DOCSTRING INFORMATION HERE
     """
 
-    STUDY_TYPE =  ("POSTGRADUATE", "UNDERGRADUATE")
+    #STUDY_TYPE =  ("POSTGRADUATE", "UNDERGRADUATE")
+    UNDERGRADUATE, POSTGRADUATE = range(2) #?????
 
     def __init__(self, study_type, f_name, l_name):
         # YOUR CODE GOES HERE
@@ -43,9 +44,23 @@ class Student:
     # def name(self):
     #     return {}{}.self
 
+    @property
+    def courses(self):
+        return self.__courses
 
-    def __str__(self):
+    @courses.setter
+    def courses(self, value):
+        if type(value) != str:
+            print("AHHH")
+
+        self.__courses.append(value)
+
+
+    def __str__(self): #dk
         return f"{self.full_name} {self.study_type} {self.courses}"
+
+    def get_all_student_data(self): # dk
+        return self.full_name, self.study_type, self.courses
 
 
 
@@ -57,12 +72,37 @@ class RegistrationData:
     def __init__(self, address, registration_fee, study_type, f_name, l_name, s_id="NA"):
         self.__address = address
         self.__registration_fee = registration_fee
-        self.student_object = Student(study_type, f_name, l_name)
         self.__s_id = s_id
+        self.student_object = Student(study_type, f_name, l_name)
+
 
     # YOUR CODE GOES HERE
+    @property
+    def student_object(self):
+        return self.student_object
 
-    def display_student_data(self):
+
+    @property
+    def address(self):
+        return self.__address
+
+    @address.setter
+    def address(self, value):
+        self.__address = value
+
+    @property
+    def registration_fee(self):
+        return self.__registration_fee
+
+    # ..............
+
+
+    def display_student_data(self): # dk
+        print(self.student_object)
+
+
+
+
 
 
 
@@ -78,3 +118,6 @@ for course in ("OOP", "Advanced Databases", "Environmental Analytics"):
 r.display_student_data()
 
 # print(RegistrationData.__doc__)
+
+#display
+# mix other datatype
