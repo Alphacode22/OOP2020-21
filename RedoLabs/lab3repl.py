@@ -24,5 +24,5 @@ class word_scrambler
                 swapped_word = ''.join(temp_word)
                 sentence[index] = swapped_word
 
-            else:
+            # else:
 
