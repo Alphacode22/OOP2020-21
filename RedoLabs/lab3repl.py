@@ -1,4 +1,4 @@
-class word_scrambler
+class word_scrambler:
     def __init__(self):
         self.user_input = input("Please give me a sentence")
 
